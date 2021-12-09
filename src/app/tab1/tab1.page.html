@@ -1,17 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Browse
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-padding">
+    <ion-list>
+      <ion-list-header class="flex-child"><h3>Top Tracks</h3></ion-list-header>
+      <div class = "charts">
+        <ion-card class = "card" *ngFor="let item of topTracks" (click)="displayOptions(item, $event)">
+          <img [src]="item.album.cover_xl" />
+          <ion-card-header>
+            <ion-card-title>{{item.title}}</ion-card-title>
+            <ion-card-subtitle>{{item.artist.name}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+      <ion-list-header><h3>Top Artists</h3></ion-list-header>
+      <div class = "charts">
+        <ion-card class = "card" *ngFor="let item of topArists" [routerLink]="['/artist-detail', item.id]">
+          <img [src]="item.picture_xl" />
+          <ion-card-header>
+            <ion-card-title>{{item.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+      
+      <ion-list-header><h3>Top Albums</h3></ion-list-header>
+      <div class = "charts">
+        <ion-card class = "card" *ngFor="let item of topAlbums" [routerLink]="['/album-detail', item.id]">
+          <img [src]="item.cover_xl" />
+          <ion-card-header>
+            <ion-card-title>{{item.title}}</ion-card-title>
+            <ion-card-subtitle>{{item.artist.name}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-list>
+  </div>
 </ion-content>

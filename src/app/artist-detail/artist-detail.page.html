@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Artist
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="artistInfo">
+    <ion-img style = "width: 70%; margin: auto;" [src]="artistInfo.picture_xl"></ion-img>
+    <ion-item>
+      <h1>{{artistInfo.name}}</h1>
+      <ion-button fill = "clear" (click)="changeView()" slot="end">
+        <ion-icon [name]="heartClass" color="danger">
+        </ion-icon>
+     </ion-button>
+     
+    </ion-item>
+    <ion-list>
+      <ion-list-header style="font-size: 18px">Top Songs</ion-list-header>
+      <ion-item *ngFor="let item of artistTopHits | slice:0:5">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="item.album.cover_xl"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{item.title}}</h2>
+          <p>{{item.album.title}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  
+    <ion-list>
+      <ion-list-header style="font-size: 18px">Discography</ion-list-header>
+      <div class = "charts">
+        <ion-card class = "card" *ngFor="let item of artistAlbums"  [routerLink]="['/album-detail', item.id]">
+          <img [src]="item.cover_xl" />
+          <ion-card-header>
+            <ion-card-title>{{item.title}}</ion-card-title>
+            <ion-card-subtitle>{{formatDate(item.release_date)}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-list>
+  
+    <ion-list>
+      <ion-list-header style="font-size: 18px">Similar Artists</ion-list-header>
+      <div class = "charts">
+        <ion-card class = "card" *ngFor="let item of artistRelatedArtists | slice:0:10" [routerLink]="['/artist-detail', item.id]">
+          <img [src]="item.picture_xl" />
+          <ion-card-header>
+            <ion-card-title>{{item.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>

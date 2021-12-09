@@ -1,17 +1,34 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Favourite
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="ion-padding">
+    <ion-list>
+      <ion-list-header class="flex-child"><h3>Favourite Artists</h3></ion-list-header>
+      <div class = "charts">
+        <ion-card class = "card" *ngFor="let item of artists" (click)="displayOptions(item, $event)" [routerLink]="['/artist-detail', item.artistID]">
+          <img [src]="item.artistCover" />
+          <ion-card-header>
+            <ion-card-title>{{item.artistName}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-list>
+    <ion-list>
+      <ion-list-header class="flex-child"><h3>Favourite Albums</h3></ion-list-header>
+      <div class = "charts">
+        <ion-card class = "card" *ngFor="let item of albums" (click)="displayOptions(item, $event)" [routerLink]="['/album-detail', item.albumID]">
+          <img [src]="item.albumCover" />
+          <ion-card-header>
+            <ion-card-title>{{item.albumName}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-list>
+  </div>
 </ion-content>

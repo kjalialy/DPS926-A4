@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Album
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="albumInfo">
+    <ion-img style = "width: 70%; margin: auto;" [src]="albumInfo.cover_xl"></ion-img>
+    <ion-item lines="none">
+      <h1>{{albumInfo.title}}</h1>
+      <ion-button fill = "clear" (click)="changeView()" slot="end">
+        <ion-icon [name]="heartClass" color="danger">
+        </ion-icon>
+     </ion-button>
+    </ion-item>
+    <ion-item lines="none">
+      <h5>{{listContributors()}}</h5>
+    </ion-item>
+    <ion-item lines="none">
+      <h5 style="font-size: 14px;">{{albumInfo.genres.data[0].name}} · {{formatDate(albumInfo.release_date)}}</h5>
+    </ion-item>
+
+    <ion-list>
+      <ion-list-header>Tracklist</ion-list-header>
+      <ion-item *ngFor="let item of albumInfo.tracks.data;let idx=index;">
+        <ion-label style="font-size: 14px;">{{idx + 1}} {{item.title}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
