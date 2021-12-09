@@ -46,16 +46,6 @@ export class ArtistDetailPage implements OnInit {
         this.heartClass = "heart";
       }
     })
-    /*
-    for (let i of await this.dbService.getArtists()) {
-      if (Number(i.artistID) == Number(id)) {
-        this.isFavourite = true;
-        this.heartClass = "heart";
-      }
-    }*/
-
-
-    //this.artists = await this.dbService.getArtists();
   }
 
   formatDate(date) {
@@ -70,15 +60,9 @@ export class ArtistDetailPage implements OnInit {
     }
 
     if (this.isFavourite) {
-      /*
-      this.dbService.deleteArtist(Number(newArtist.artistID)).then(async item => {
-        await this.presentToast(`${newArtist.artistName} has been removed from your favourites`);
-      })*/
-
       this.dbService.deleteArtist(newArtist.artistID).then(async(res) => {
         await this.presentToast(`${newArtist.artistName} has been removed from your favourites`);
       })
-      //this.artists = await this.dbService.getArtists();
       this.isFavourite = false;
       this.heartClass = "heart-outline";
     }
