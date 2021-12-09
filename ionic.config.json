@@ -1,0 +1,7 @@
+{
+  "name": "DPSA4-MusicApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
